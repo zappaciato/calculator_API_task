@@ -76,6 +76,7 @@ class CalculatorService
         if ($operandY == 0) {
             throw new \InvalidArgumentException("Cannot divide by zero.");
         }
+        
         return $operandX / $operandY;
     }
 }
