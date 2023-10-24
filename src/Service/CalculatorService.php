@@ -7,6 +7,16 @@ use Exception;
 class CalculatorService
 {
 
+    /**
+     * Function which triggers mathematical operation depending on the request.
+     * Returns float and accepts three parameters operandX (integer and float type) and operandY (integer and float type)
+     * and Operation (string), which is used as a condition in match() method.
+     *
+     * @param integer|float $operandX
+     * @param integer|float $operandY
+     * @param string $operation
+     * @return float
+     */
     public function calculate(int|float $operandX, int|float $operandY, string $operation): float
     {
 
@@ -19,22 +29,49 @@ class CalculatorService
         };
     }
 
-    public function add($operandX, $operandY)
+    /**
+     * Function performing calculation (adding) on two operands.
+     *
+     * @param [type] $operandX
+     * @param [type] $operandY
+     * @return float
+     */
+    public function add($operandX, $operandY) : float
     {
         return $operandX + $operandY;
     }
-
-    public function subtract($operandX, $operandY)
+    /**
+     * Function performing calculation (subtracting) on two operands.
+     *
+     * @param [type] $operandX
+     * @param [type] $operandY
+     * @return float
+     */
+    public function subtract($operandX, $operandY) : float
     {
         return $operandX - $operandY;
     }
 
-    public function multiply($operandX, $operandY)
+    /**
+     * Function performing calculation (multiplying) on two operands.
+     *
+     * @param [type] $operandX
+     * @param [type] $operandY
+     * @return float
+     */
+    public function multiply($operandX, $operandY) : float
     {
         return $operandX * $operandY;
     }
 
-    public function divide($operandX, $operandY)
+    /**
+     * Function performing calculation (dividing) on two operands.
+     *
+     * @param [type] $operandX
+     * @param [type] $operandY
+     * @return float
+     */
+    public function divide($operandX, $operandY) : float
     {
         if ($operandY == 0) {
             throw new \InvalidArgumentException("Cannot divide by zero.");
