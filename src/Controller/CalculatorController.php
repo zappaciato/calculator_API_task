@@ -2,7 +2,9 @@
 
 namespace App\Controller;
 
+use Exception;
 use Psr\Log\LoggerInterface;
+use App\Utilities\InputValidator;
 use App\Service\CalculatorService;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -15,44 +17,19 @@ class CalculatorController extends AbstractController
 
     }
 
-
-    #[Route('/add/{operand_x}/{operand_y}', name: 'add_calculator', methods: ['GET'])]
-    public function add($operand_x, $operand_y): JsonResponse
+    #[Route('/{operation}/{operand_x}/{operand_y}', name: 'add_calculator', methods: ['GET'])]
+    public function calculate($operand_x, $operand_y, $operation): JsonResponse
     {
-        $result = $this->calculatorService->add($operand_x, $operand_y);
-        $this->logger->info('Operands successfully added.');
-        return $this->json([
-            $result
-        ]);
+        try {
+            InputValidator::validate($operand_x, $operand_y);
+            $result = $this->calculatorService->calculate($operand_x, $operand_y, $operation);
+        } catch (Exception $e) {
+            $this->logger->error('File: ' . $e->getFile() . ' line: ' . $e->getLine() . ' message: ' . $e->getMessage());
+
+            return $this->json($e->getMessage());
+        }
+
+        return $this->json($result);
     }
 
-    #[Route('/subtract/{operand_x}/{operand_y}', name: 'subtract_calculator', methods: ['GET'])]
-    public function subtract($operand_x, $operand_y): JsonResponse
-    {
-        $result = $this->calculatorService->subtract($operand_x, $operand_y);
-
-        return $this->json([
-            $result
-        ]);
-    }
-
-    #[Route('/multiply/{operand_x}/{operand_y}', name: 'multiply_calculator', methods: ['GET'])]
-    public function multiply($operand_x, $operand_y): JsonResponse
-    {
-        $result = $this->calculatorService->multiply($operand_x, $operand_y);
-
-        return $this->json([
-            $result
-        ]);
-    }
-
-    #[Route('/divide/{operand_x}/{operand_y}', name: 'divide_calculator', methods: ['GET'])]
-    public function divide($operand_x, $operand_y): JsonResponse
-    {
-        $result = $this->calculatorService->divide($operand_x, $operand_y);
-
-        return $this->json([
-            $result
-        ]);
-    }
 }
