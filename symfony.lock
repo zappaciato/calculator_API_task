@@ -1,5 +1,4 @@
 {
-
     "doctrine/annotations": {
         "version": "2.0",
         "recipe": {
@@ -32,7 +31,8 @@
         },
         "files": [
             "./config/packages/nelmio_cors.yaml"
-=======
+        ]
+    },
     "phpunit/phpunit": {
         "version": "10.4",
         "recipe": {
@@ -45,7 +45,6 @@
             "./.env.test",
             "./phpunit.xml.dist",
             "./tests/bootstrap.php"
-
         ]
     },
     "symfony/console": {
