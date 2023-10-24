@@ -2,30 +2,43 @@
 
 namespace App\Service;
 
+use Exception;
+
 class CalculatorService
 {
 
-
-    public function add($a, $b)
+    public function calculate(int|float $operandX, int|float $operandY, string $operation): float
     {
-        return $a + $b;
+
+        return match ($operation) {
+            'add'       => $this->add($operandX, $operandY),
+            'subtract'  => $this->subtract($operandX, $operandY),
+            'multiply'  => $this->multiply($operandX, $operandY),
+            'divide'    => $this->divide($operandX, $operandY),
+            default     => throw new Exception('Invalid Operation type!')
+        };
     }
 
-    public function subtract($a, $b)
+    public function add($operandX, $operandY)
     {
-        return $a - $b;
+        return $operandX + $operandY;
     }
 
-    public function multiply($a, $b)
+    public function subtract($operandX, $operandY)
     {
-        return $a * $b;
+        return $operandX - $operandY;
     }
 
-    public function divide($a, $b)
+    public function multiply($operandX, $operandY)
     {
-        if ($b == 0) {
+        return $operandX * $operandY;
+    }
+
+    public function divide($operandX, $operandY)
+    {
+        if ($operandY == 0) {
             throw new \InvalidArgumentException("Cannot divide by zero.");
         }
-        return $a / $b;
+        return $operandX / $operandY;
     }
 }
