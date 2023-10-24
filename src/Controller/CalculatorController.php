@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use Psr\Log\LoggerInterface;
 use App\Service\CalculatorService;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -9,7 +10,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class CalculatorController extends AbstractController
 {
-    public function __construct(private readonly CalculatorService $calculatorService)
+    public function __construct(private readonly CalculatorService $calculatorService, private readonly LoggerInterface $logger)
     {
 
     }
@@ -19,7 +20,7 @@ class CalculatorController extends AbstractController
     public function add($operand_x, $operand_y): JsonResponse
     {
         $result = $this->calculatorService->add($operand_x, $operand_y);
-
+        $this->logger->info('Operands successfully added.');
         return $this->json([
             $result
         ]);
