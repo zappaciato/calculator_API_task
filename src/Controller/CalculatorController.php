@@ -29,7 +29,10 @@ class CalculatorController extends AbstractController
             return $this->json($e->getMessage());
         }
 
-        return $this->json($result);
+        // $finalResult['result'] = $result;
+        $finalResult = ['result' => $result];
+
+        return $this->json($finalResult);
     }
 
 }
