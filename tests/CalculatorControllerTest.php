@@ -25,10 +25,11 @@ class CalculatorControllerTest extends WebTestCase
         $client = static::createClient();
         $client->request('GET', '/'.$operationType.'/'. $x .'/'. $y);
         $response = $client->getResponse();
-        $actual = json_decode($response->getContent(), true);
-        // dd($result);
+        $actual = json_decode($response->getContent(), true)['result'];
+        print_r($result);
+        print_r($actual);
         $this->assertEquals(200, $response->getStatusCode());
-        $this->assertEquals($result, $actual);
+        $this->assertSame($result, $actual);
     }
 
     /**

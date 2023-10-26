@@ -48,6 +48,6 @@ class CalculatorServiceTest extends TestCase
         $this->expectException(Exception::class);
         $this->expectExceptionMessage('Invalid Operation type!');
         $calculatorUnderTest = new CalculatorService();
-        $calculatorUnderTest->calculate(4, 10, "invalidOperationType");
+        $calculatorUnderTest->calculate(4, 10, "invalidOperationType!!xdwe");
     }
 }
