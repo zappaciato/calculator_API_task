@@ -26,8 +26,6 @@ class CalculatorControllerTest extends WebTestCase
         $client->request('GET', '/'.$operationType.'/'. $x .'/'. $y);
         $response = $client->getResponse();
         $actual = json_decode($response->getContent(), true)['result'];
-        print_r($result);
-        print_r($actual);
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertSame($result, $actual);
     }
@@ -62,9 +60,10 @@ class CalculatorControllerTest extends WebTestCase
     public static function dataProvider()
     {
         return [
-            [2, 3, 'add', 5],
-            [100, 2, 'divide', 50],
-            [2, 3, 'multiply', 6],
+            'Testing adding' => [2, 3, 'add', 5],
+            'Testing dividing' => [100, 2, 'divide', 50],
+            'Testing multiplying' =>[2, 3, 'multiply', 6],
+            'Testing multiplying float' => [2, 1.55, 'multiply', 3.1],
         ];
     }
 

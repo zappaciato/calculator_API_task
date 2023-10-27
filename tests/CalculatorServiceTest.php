@@ -30,11 +30,12 @@ class CalculatorServiceTest extends TestCase
     public static function dataProvider()
     {
         return [
-            [2, 3, 'add', 5],
-            [100, 2, 'divide', 50],
-            [2, 3, 'multiply', 6],
-            [2, 3, 'subtract', -1],
-            [20.2, 2, 'subtract', 18.2],
+            'Testing adding'                => [2, 3, 'add', 5],
+            'Testing dividing'              => [100, 2, 'divide', 50],
+            'Testing multiplying'           => [2, 3, 'multiply', 6],
+            'Testing subtracting'           => [2, 3, 'subtract', -1],
+            'Testing adding a float'        => [20.2, 2, 'subtract', 18.2],
+            'Testing multiplying a float'   => [20.2, 2, 'multiply', 40.4],
         ];
     }
 
